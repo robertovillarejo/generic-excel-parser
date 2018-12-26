@@ -24,32 +24,14 @@
 
 package mx.infotec.dads.kukulkan.genericexcelparser;
 
-import java.util.Map;
+import java.util.Optional;
 
 import org.apache.poi.ss.usermodel.Row;
 
-public interface ExcelRowParser<T> {
+public interface ExcelRowParserRegistry<T> {
 
-    /**
-     * Parse the row and returns an object of type <T>
-     * 
-     * @param row
-     * @return <T>
-     */
-    public T parse(Row row);
+    public Optional<ExcelRowParser<T>> lookup(String parserName);
 
-    /**
-     * Returns the name of the parser This name should be unique
-     * 
-     * @return the parser name
-     */
-    public String getName();
-
-    /**
-     * Returns the supported schema to parse
-     * 
-     * @return the supported schema
-     */
-    public Map<Integer, String> getSupportedSchema();
+    public String detect(Row row);
 
 }

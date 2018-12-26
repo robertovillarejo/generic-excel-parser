@@ -41,11 +41,11 @@ public class ExcelRowParserTest extends TestCase {
                 "/home/roberto/git/generic-excel-parser/generic-excel-parser/src/test/resources/data_example.xlsx");
         Iterator<Row> rowIt = workbook.getSheetAt(0).rowIterator();
         Row headersRow = rowIt.next();
-        Map<String, String> namedMappingSchema = ExcelRowParser.parseMappingSchema(
+        Map<String, String> namedMappingSchema = ExcelRowMapParser.parseMappingSchema(
                 "evento:Partida,partida:Póliza,poliza:Fecha de transacción,fecha:Importe,total:Área,area:id");
 
-        SortedMap<Integer, String> mappingSchema = ExcelRowParser.getMappingSchema(headersRow, namedMappingSchema);
-        ExcelRowParser parser = new ExcelRowParser(mappingSchema);
+        SortedMap<Integer, String> mappingSchema = ExcelRowMapParser.getMappingSchema(headersRow, namedMappingSchema);
+        ExcelRowMapParser parser = new ExcelRowMapParser(mappingSchema);
         Map<String, Object> mappedInstance = parser.map(rowIt.next());
         System.out.println("Mapped Row: " + mappedInstance);
         ObjectMapper mapper = new ObjectMapper();
